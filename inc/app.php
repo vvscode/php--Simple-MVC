@@ -5,7 +5,7 @@ class App
     public function __construct()
     {
         $url = isset($_GET['url'])? trim($_GET['url']): DEFAULT_CONTROLLER;
-        $urlParts = explode('/', $url);
+        $urlParts = explode('/', rtrim($url,'/'));
 
         $controllerFileName = 'inc/controllers/'.$urlParts[0].'.php';
         $controllerName = $urlParts[0].'Controller';
