@@ -5,7 +5,11 @@ class MainController
 
     public function __construct()
     {
-        echo __CLASS__;
+        echo __CLASS__.'<br />';
+    }
+
+    public function testAction(){
+        echo __METHOD__.'<br />';
     }
 
 }
