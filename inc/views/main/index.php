@@ -1,10 +1,5 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Main / Index</title>
-</head>
-<body>
+<?php require 'inc/views/header.php'; ?>
+<div class="container">
 <h1>Main page - index</h1>
-</body>
-</html>
+</div>
+<?php require 'inc/views/footer.php'; ?>
