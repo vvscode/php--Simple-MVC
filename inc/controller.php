@@ -2,9 +2,14 @@
 
 class Controller
 {
+    /**
+     * @var View
+     */
+    protected $view;
+
     public function __construct()
     {
-        echo __CLASS__.'<br />';
+        $this->view = new View();
     }
 
     public function indexAction(){
