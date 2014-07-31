@@ -1,10 +1,11 @@
 <?php
 
-class MainController
+class MainController extends Controller
 {
 
     public function __construct()
     {
+        parent::__construct();
         echo __CLASS__.'<br />';
     }
 
