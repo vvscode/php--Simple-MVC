@@ -10,6 +10,9 @@ class Controller
     public function __construct()
     {
         $this->view = new View();
+
+        // По умолчанию в залоговок выведем название контроллера
+        $this->view->title = get_class($this);
     }
 
     public function indexAction(){
