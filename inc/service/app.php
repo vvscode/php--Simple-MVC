@@ -7,18 +7,16 @@ class App
         $url = isset($_GET['url'])? trim($_GET['url']): DEFAULT_CONTROLLER;
         $urlParts = explode('/', rtrim($url,'/'));
 
+        $actionParams = array_slice($urlParts, 2);
+
         $controllerName = $urlParts[0].'Controller';
 
         $controller = new $controllerName;
 
-        if(isset($urlParts[1])){
-            $actionName = $urlParts[1].'Action';
-        } else {
-            $actionName = 'indexAction';
-        }
+        $actionName = isset($urlParts[1])? $urlParts[1].'Action': 'indexAction';
 
         if(method_exists($controller, $actionName)){
-            $controller->$actionName();
+            call_user_func_array(array($controller, $actionName), $actionParams);
         } else {
             throw new Exception('Action not found');
         }
