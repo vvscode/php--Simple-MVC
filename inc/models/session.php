@@ -34,11 +34,13 @@ Class SessionModel extends Model
     public function login($login, $pass)
     {
         $this->user = UserModel::findBy(array('login' => $login, 'authkey' => $pass));
+        return (bool) $this->user;
     }
 
     public function logout()
     {
         session_destroy();
+        $this->user = null;
     }
 
     public function __destruct()

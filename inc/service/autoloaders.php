@@ -3,18 +3,18 @@
 // Подргузка моделей
 spl_autoload_register(function ($class) {
     $modelFlag = strpos($class, 'Model');
-    if($modelFlag === FALSE){
+    if ($modelFlag === FALSE) {
         return FALSE;
     }
 
-    if($class == 'Model'){
+    if ($class == 'Model') {
         require_once('inc/service/model.php');
         return true;
     }
 
-    $modelName = str_replace('model','', strtolower($class));
-    $modelFileName = 'inc/models/'.$modelName.'.php';
-    if(file_exists($modelFileName)){
+    $modelName = str_replace('model', '', strtolower($class));
+    $modelFileName = 'inc/models/' . $modelName . '.php';
+    if (file_exists($modelFileName)) {
         require_once($modelFileName);
         return true;
     }
@@ -24,18 +24,18 @@ spl_autoload_register(function ($class) {
 spl_autoload_register(function ($class) {
 
     $controllerFlag = strpos($class, 'Controller');
-    if($controllerFlag === FALSE){
+    if ($controllerFlag === FALSE) {
         return FALSE;
     }
 
-    if($class == 'Controller'){
+    if ($class == 'Controller') {
         require_once('inc/service/controller.php');
         return true;
     }
 
-    $controllerName = str_replace('controller','', strtolower($class));
-    $controllerFileName = 'inc/controllers/'.$controllerName.'.php';
-    if(file_exists($controllerFileName)){
+    $controllerName = str_replace('controller', '', strtolower($class));
+    $controllerFileName = 'inc/controllers/' . $controllerName . '.php';
+    if (file_exists($controllerFileName)) {
         require_once($controllerFileName);
         return true;
     }
@@ -43,9 +43,9 @@ spl_autoload_register(function ($class) {
 
 // Подргузка сервисных классов
 spl_autoload_register(function ($class) {
-    $classFileName = 'inc/service/'.trim($class).'.php';
+    $classFileName = 'inc/service/' . trim($class) . '.php';
 
-    if(file_exists($classFileName)){
+    if (file_exists($classFileName)) {
         require_once($classFileName);
         return true;
     }
