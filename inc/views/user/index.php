@@ -1,4 +1,3 @@
-<?php require 'inc/views/header.php'; ?>
 <div class="container">
 <h2>Список пользователей</h2>
 
@@ -7,4 +6,3 @@
 <li value="<?= $user['id']?>"><?= $user['name']?></li>
 <?php } ?>
 </ol>
-<?php require 'inc/views/footer.php'; ?>

@@ -9,6 +9,8 @@ class View {
      * @param $name имя шаблона, который нужно отобразить
      */
     public function render($name){
+        require 'inc/views/header.php';
          require('inc/views/'.$name.'.php');
+        require 'inc/views/footer.php';
     }
 }
