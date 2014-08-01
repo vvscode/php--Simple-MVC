@@ -15,7 +15,8 @@ class Controller
         $this->view->title = get_class($this);
     }
 
-    public function indexAction(){
-        echo __CLASS__.'->'.__METHOD__.'<br />';
+    public function indexAction()
+    {
+        echo __CLASS__ . '->' . __METHOD__ . '<br />';
     }
 } 

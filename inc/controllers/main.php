@@ -8,7 +8,8 @@ class MainController extends Controller
         parent::__construct();
     }
 
-    public function indexAction(){
+    public function indexAction()
+    {
         $this->view->render('main/index');
     }
 
@@ -21,7 +22,8 @@ class MainController extends Controller
      * main/test/1/2
      * main/test/1/2/3
      */
-    public function testAction($param1 = null, $param2 = null){
+    public function testAction($param1 = null, $param2 = null)
+    {
         $this->view->param1 = $param1;
         $this->view->param2 = $param2;
 
