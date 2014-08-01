@@ -1,6 +1,5 @@
 <?php
 
-require_once('inc/service/model.php');
 class UserModel extends Model
 {
 
