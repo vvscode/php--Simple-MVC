@@ -32,8 +32,9 @@ class App
     /**
      * @return int Число микросекунд времени выполнения скрипта
      */
-    public static function getExecutionTime(){
+    public static function getExecutionTime()
+    {
         $end = microtime(true);
-        return ($end-self::$startTime);
+        return ($end - self::$startTime);
     }
 } 

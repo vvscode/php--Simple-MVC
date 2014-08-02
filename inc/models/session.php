@@ -34,8 +34,9 @@ Class SessionModel extends Model
     /**
      * @return bool Возвращает флаг админ/не админ
      */
-    public function isAdmin(){
-        return ($this->user)? (bool)$this->user->isAdmin: FALSE;
+    public function isAdmin()
+    {
+        return ($this->user) ? (bool)$this->user->isAdmin : FALSE;
     }
 
     /**
@@ -47,7 +48,7 @@ Class SessionModel extends Model
     public function login($login, $pass)
     {
         $this->user = UserModel::findBy(array('login' => $login, 'authkey' => $pass));
-        return (bool) $this->user;
+        return (bool)$this->user;
     }
 
     /**
