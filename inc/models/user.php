@@ -3,11 +3,11 @@
 class UserModel extends Model
 {
     protected static $usersList = array(
-        array('id' => 1, 'login' => 'admin', 'authkey' => 'admin', 'name' => 'Главный администратор'),
-        array('id' => 2, 'login' => 'demo', 'authkey' => 'demo', 'name' => 'Демо пользователь'),
-        array('id' => 3, 'login' => 'user', 'authkey' => 'user', 'name' => 'Пользователь, просто пользователь'),
-        array('id' => 4, 'login' => 'test', 'authkey' => 'test', 'name' => 'Тестовый пользователь'),
-        array('id' => 5, 'login' => 'root', 'authkey' => 'R00t', 'name' => 'Самый самый главный'),
+        array('id' => 1, 'login' => 'admin', 'authkey' => 'admin', 'name' => 'Главный администратор', 'isAdmin' => TRUE),
+        array('id' => 2, 'login' => 'demo', 'authkey' => 'demo', 'name' => 'Демо пользователь', 'isAdmin' => FALSE),
+        array('id' => 3, 'login' => 'user', 'authkey' => 'user', 'name' => 'Пользователь, просто пользователь', 'isAdmin' => FALSE),
+        array('id' => 4, 'login' => 'test', 'authkey' => 'test', 'name' => 'Тестовый пользователь', 'isAdmin' => FALSE),
+        array('id' => 5, 'login' => 'root', 'authkey' => 'R00t', 'name' => 'Самый самый главный', 'isAdmin' => FALSE),
     );
 
     public function __construct(array $properties = array())

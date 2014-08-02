@@ -31,6 +31,10 @@ Class SessionModel extends Model
         return $this->isLoggedIn() ? $_SESSION['username'] : '';
     }
 
+    public function isAdmin(){
+        return ($this->user)? (bool)$this->user->isAdmin: FALSE;
+    }
+
     public function login($login, $pass)
     {
         $this->user = UserModel::findBy(array('login' => $login, 'authkey' => $pass));
