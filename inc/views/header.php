@@ -9,9 +9,9 @@
     <?php
     if ($this->session->isLoggedIn()) {
         echo $this->session->getName();
-        echo '<a href="' . 'auth/logout' . '">Выйти</a>';
+        echo '<a href="' . Controller::url('auth','logout') . '">Выйти</a>';
     } else {
-        echo '<a href="' . 'auth/login' . '">Войти</a>';
+        echo '<a href="' . Controller::url('auth', 'login') . '">Войти</a>';
     }
     ?>
     <?php

@@ -28,9 +28,29 @@ abstract class Controller
         echo __CLASS__ . '->' . __METHOD__ . '<br />';
     }
 
+    /**
+     * Выполняет перенаправление пользователя на указанный адрес
+     * @param $url
+     */
     public function redirect($url)
     {
         header('Location: ' . $url);
         die;
+    }
+
+    /**
+     * Возвращает URL для указанных параметров
+     * Число параметров - не менее одного
+     * Первый - имя контроллера
+     * Остальные в порядке использования - имя метода, значения параметров
+     * @param $controller
+     * @return mixed
+     */
+    public static function url($controller)
+    {
+        $args = func_get_args();
+
+        return APP_BASE_URL . implode("/", $args);
+
     }
 } 
