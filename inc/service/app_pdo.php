@@ -7,6 +7,7 @@ class App_PDO extends PDO
     protected function __constructor($dsn, $username = '', $password = '', $options = array())
     {
         parent::__construct($dsn, $username, $password, $options);
+        $this->setAttribute(PDO::ATTR_STATEMENT_CLASS, array('App_PDO_Statement', array($this)));
     }
 
     /**
