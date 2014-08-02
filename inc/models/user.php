@@ -2,6 +2,7 @@
 
 class UserModel extends Model
 {
+
     protected static $usersList = array(
         array('id' => 1, 'login' => 'admin', 'authkey' => 'admin', 'name' => 'Главный администратор', 'isAdmin' => TRUE),
         array('id' => 2, 'login' => 'demo', 'authkey' => 'demo', 'name' => 'Демо пользователь', 'isAdmin' => FALSE),
@@ -21,7 +22,12 @@ class UserModel extends Model
 
     public static function getList()
     {
-        $arr = self::$usersList;
+        self::model();
+        $st = self::$dbc->query('SELECT * FROM '.APP_DB_PREFIX.'users');
+        if($st){
+            $arr = $st->fetchAll(PDO::FETCH_ASSOC);
+        }
+
         array_walk($arr, function (&$val, $key) {
             unset($val['authkey']);
         });
