@@ -37,6 +37,12 @@ class App_PDO extends PDO
         return call_user_func_array(array('parent','query'), $args);
     }
 
+    public function prepare($statement, $options = NULL){
+        $this->setAttribute(PDO::ATTR_STATEMENT_CLASS, array('App_PDO_Statement', array($this)));
+        $originalStatement =  call_user_func_array(array('parent','prepare'), func_get_args());
+        return $originalStatement;
+    }
+
     /**
      * ДОбавляет запрос в счетчик запросов. Заодно может его логировать
      * @param string $query принимает текст запроса в качестве параметра
