@@ -20,6 +20,10 @@ class UserModel extends Model
         }
     }
 
+    /**
+     * @return array Возвращает список пользователей в виде массива
+     * Ключ авторизации удаляется из элементов массива
+     */
     public static function getList()
     {
         self::model();
@@ -34,20 +38,30 @@ class UserModel extends Model
         return $arr;
     }
 
+    /**
+     * Находит первого пользователя, который подпадает под указанные условия поиска
+     * Если пользователь не найден - вернет null
+     * @param array $condition Массив пар поле пользователя - значение
+     * @return null|UserModel
+     */
     public static function findBy(array $condition)
     {
-        foreach (self::$usersList as $uData) {
-            $flag = true;
-            foreach ($condition as $key => $val) {
-                if (!isset($uData[$key]) || $uData[$key] != $val) {
-                    $flag = false;
-                    break;
-                }
-            }
+        self::model();
+        $query = 'SELECT * FROM '.APP_DB_PREFIX.'users';
+        if(!empty($condition)){
+            $query .= ' WHERE ';
 
-            if ($flag == true) {
-                return new self($uData);
+            $whereConditions = array();
+            foreach($condition as $key => $val){
+                $whereConditions[] = "$key = :$key";
             }
+            $query .= implode(' AND ', $whereConditions);
+        }
+        $st = self::$dbc->prepare($query);
+        $stResult = $st->execute($condition);
+        $uData = $stResult? $st->fetch(PDO::FETCH_ASSOC): null;
+        if($stResult && $uData){
+            return new self($uData);
         }
 
         return null;

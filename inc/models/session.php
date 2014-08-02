@@ -31,16 +31,28 @@ Class SessionModel extends Model
         return $this->isLoggedIn() ? $_SESSION['username'] : '';
     }
 
+    /**
+     * @return bool Возвращает флаг админ/не админ
+     */
     public function isAdmin(){
         return ($this->user)? (bool)$this->user->isAdmin: FALSE;
     }
 
+    /**
+     * Попытка залогиниться в систему с указанными данными. Вернет результат попытки
+     * @param $login
+     * @param $pass
+     * @return bool
+     */
     public function login($login, $pass)
     {
         $this->user = UserModel::findBy(array('login' => $login, 'authkey' => $pass));
         return (bool) $this->user;
     }
 
+    /**
+     * Выход из системы
+     */
     public function logout()
     {
         session_destroy();
