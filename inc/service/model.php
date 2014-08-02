@@ -17,11 +17,11 @@ class Model
         }
     }
 
+    /**
+     * @return App_PDO Возвращает объект соединения с базой данных
+     */
     public static function db()
     {
-        if (!self::$dbc) {
-            self::$dbc = new PDO('mysql:host=' . APP_DB_HOST . ';dbname=' . APP_DB_DATABSE, APP_DB_USER, APP_DB_PASS);
-        }
-        return self::$dbc;
+        return App_PDO::getInstance();
     }
 } 
