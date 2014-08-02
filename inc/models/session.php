@@ -12,7 +12,9 @@ Class SessionModel extends Model
         session_start();
 
         $userId = isset($_SESSION['userId']) ? $_SESSION['userId'] : null;
-        $this->user = UserModel::findBy(array('id' => $userId));
+        if($userId){
+            $this->user = UserModel::findBy(array('id' => $userId));
+        }
     }
 
     /**
