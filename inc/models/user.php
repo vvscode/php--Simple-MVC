@@ -26,8 +26,7 @@ class UserModel extends Model
      */
     public static function getList()
     {
-        self::model();
-        $st = self::$dbc->query('SELECT * FROM '.APP_DB_PREFIX.'users');
+        $st = self::db()->query('SELECT * FROM '.APP_DB_PREFIX.'users');
         if($st){
             $arr = $st->fetchAll(PDO::FETCH_ASSOC);
         }
@@ -46,7 +45,6 @@ class UserModel extends Model
      */
     public static function findBy(array $condition)
     {
-        self::model();
         $query = 'SELECT * FROM '.APP_DB_PREFIX.'users';
         if(!empty($condition)){
             $query .= ' WHERE ';
@@ -57,7 +55,7 @@ class UserModel extends Model
             }
             $query .= implode(' AND ', $whereConditions);
         }
-        $st = self::$dbc->prepare($query);
+        $st = self::db()->prepare($query);
         $stResult = $st->execute($condition);
         $uData = $stResult? $st->fetch(PDO::FETCH_ASSOC): null;
         if($stResult && $uData){
