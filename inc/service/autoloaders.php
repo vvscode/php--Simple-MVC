@@ -43,7 +43,7 @@ spl_autoload_register(function ($class) {
 
 // Подргузка сервисных классов
 spl_autoload_register(function ($class) {
-    $classFileName = 'inc/service/' . trim($class) . '.php';
+    $classFileName = 'inc/service/' . strtolower($class) . '.php';
 
     if (file_exists($classFileName)) {
         require_once($classFileName);
