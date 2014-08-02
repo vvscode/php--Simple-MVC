@@ -3,6 +3,6 @@
 
     <ol>
         <?php foreach ($this->users as $user) { ?>
-            <li value="<?= $user['id'] ?>"><?= $user['name'] ?></li>
+            <li value="<?= $user['id'] ?>"><a href="<?= Controller::url('user','view', $user['id'])?>"><?= $user['name'] ?></a></li>
         <?php } ?>
     </ol>
