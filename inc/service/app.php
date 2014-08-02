@@ -2,8 +2,15 @@
 
 class App
 {
+    /**
+     * @var int Время старта приложения с микросекундах
+     */
+    private static $startTime;
+
     public function __construct()
     {
+        self::$startTime = microtime(true);
+
         $url = isset($_GET['url']) ? trim($_GET['url']) : DEFAULT_CONTROLLER;
         $urlParts = explode('/', rtrim($url, '/'));
 
@@ -20,5 +27,13 @@ class App
         } else {
             throw new Exception('Action not found');
         }
+    }
+
+    /**
+     * @return int Число микросекунд времени выполнения скрипта
+     */
+    public static function getExecutionTime(){
+        $end = microtime(true);
+        return ($end-self::$startTime);
     }
 } 
