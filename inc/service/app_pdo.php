@@ -3,6 +3,10 @@
 class App_PDO extends PDO
 {
     protected static $instance;
+    /**
+     * @var int Статическая переменная для сохранения числа запросов
+     */
+    protected static $queryCount = 0;
 
     protected function __constructor($dsn, $username = '', $password = '', $options = array())
     {
@@ -20,5 +24,32 @@ class App_PDO extends PDO
         }
 
         return self::$instance;
+    }
+
+    /**
+     * Переопределенный метод query для логирования запросов
+     * @param string $statment
+     * @return mixed|PDOStatement
+     */
+    public function query($statment){
+        $this->addQuery($statment);
+        $args = func_get_args();
+        return call_user_func_array(array('parent','query'), $args);
+    }
+
+    /**
+     * ДОбавляет запрос в счетчик запросов. Заодно может его логировать
+     * @param string $query принимает текст запроса в качестве параметра
+     */
+    public function addQuery($query = ''){
+        self::$queryCount++;
+    }
+
+    /**
+     * Возвращает колличество залогированных запросов
+     * @return int
+     */
+    public static function getQueryCount(){
+        return self::$queryCount;
     }
 }
