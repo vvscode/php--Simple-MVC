@@ -85,7 +85,7 @@ Class GbMessageModel extends Model{
     }
 
     public static function getList($pageNum = 1, $perPage = APP_GB_MESSAGES_PER_PAGE){
-        $offset =  $perPage*(($pageNum > 1)? ($pageNum-1)*$perPage: 0);
+        $offset =  ($pageNum > 1)? ($pageNum-1)*$perPage: 0;
         $st = self::db()->prepare('SELECT * FROM '.APP_DB_PREFIX.'gb_messages LIMIT :limit OFFSET :offset');
         $st->bindParam(':limit', $perPage, PDO::PARAM_INT);
         $st->bindParam(':offset', $offset, PDO::PARAM_INT);
