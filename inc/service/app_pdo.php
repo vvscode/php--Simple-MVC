@@ -32,6 +32,7 @@ class App_PDO extends PDO
      * @return mixed|PDOStatement
      */
     public function query($statment){
+        $statment = $this->prepareQuery($statment);
         $this->addQuery($statment);
         $args = func_get_args();
         return call_user_func_array(array('parent','query'), $args);
@@ -39,7 +40,9 @@ class App_PDO extends PDO
 
     public function prepare($statement, $options = NULL){
         $this->setAttribute(PDO::ATTR_STATEMENT_CLASS, array('App_PDO_Statement', array($this)));
-        $originalStatement =  call_user_func_array(array('parent','prepare'), func_get_args());
+        $args = func_get_args();
+        $args[0] = $this->prepareQuery($args[0]);
+        $originalStatement =  call_user_func_array(array('parent','prepare'), $args);
         return $originalStatement;
     }
 
@@ -57,5 +60,9 @@ class App_PDO extends PDO
      */
     public static function getQueryCount(){
         return self::$queryCount;
+    }
+
+    public function prepareQuery($query){
+        return preg_replace('/\{\{(.+?)\}\}/', APP_DB_PREFIX.'$1', $query);
     }
 }
