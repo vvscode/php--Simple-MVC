@@ -53,6 +53,32 @@ Class GbMessageModel extends Model{
         return $this->errors;
     }
 
+    /**
+     * Вставляет сообещение в базу
+     */
+    public function insert(){
+        if($this->isValid()){
+            $st = $this->db()->prepare('INSERT INTO '.APP_DB_PREFIX.'gb_messages (userName, userEmail, messageText) VALUES(:userName, :userEmail, :messageText)');
+            $rezult = $st->execute(array(
+                ':userName' => $this->userName,
+                ':userEmail' => $this->userEmail,
+                ':messageText' => $this->messageText,
+            ));
+            if($rezult){
+                return $this->db()->lastInsertId();
+            } else {
+                $err = $st->errorInfo();
+                $this->errors['insert_error'] = $err[1].': '.$err[2];
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Сохраняет сообщение в базу
+     * @return bool
+     */
     public function save(){
         $this->errors['save'] = 'Ошибка сохранения';
         return false;
