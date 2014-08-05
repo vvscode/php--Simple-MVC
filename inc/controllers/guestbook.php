@@ -3,7 +3,7 @@
 class GuestBookController extends Controller
 {
 
-    public function indexAction()
+    public function indexAction($page = 1)
     {
         $message = new GbMessageModel();
         if($this->isPost()){
@@ -22,6 +22,8 @@ class GuestBookController extends Controller
                 }
             }
         }
+
+        $this->view->messages = GbMessageModel::getList($page);
 
         $this->view->msg = $message;
         $this->view->gbCaptchaQuestion = Captcha::getCaptchaQuestion('gbForm');
