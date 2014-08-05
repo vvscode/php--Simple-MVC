@@ -6,6 +6,7 @@ class App
      * @var int Время старта приложения с микросекундах
      */
     private static $startTime;
+    private static $controllerName;
 
     public function __construct()
     {
@@ -16,7 +17,9 @@ class App
 
         $actionParams = array_slice($urlParts, 2);
 
-        $controllerName = $urlParts[0] . 'Controller';
+        self::$controllerName = $urlParts[0];
+
+        $controllerName =  self::$controllerName . 'Controller';
 
         $controller = new $controllerName;
 
@@ -37,4 +40,14 @@ class App
         $end = microtime(true);
         return ($end - self::$startTime);
     }
+
+    /**
+     * Возвращает имя текущего контроллера
+     * @return mixed
+     */
+    public static function getCurrentController(){
+        return strtolower(self::$controllerName);
+    }
+
+
 } 
