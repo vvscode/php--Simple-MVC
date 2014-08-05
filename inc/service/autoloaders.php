@@ -50,3 +50,13 @@ spl_autoload_register(function ($class) {
         return true;
     }
 });
+
+// Подргузка классов-помшников
+spl_autoload_register(function ($class) {
+    $classFileName = 'inc/helpers/' . strtolower($class) . '.php';
+
+    if (file_exists($classFileName)) {
+        require_once($classFileName);
+        return true;
+    }
+});
