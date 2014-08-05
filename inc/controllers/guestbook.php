@@ -11,7 +11,7 @@ class GuestBookController extends Controller
 
             $message->setAttributes($_POST);
 
-            if($message->isValid() AND $captchaFlag AND $message->save()){
+            if($message->isValid() AND $captchaFlag AND $message->insert()){
                 $message->messageText = "";
                 $this->view->result = "Сообщение сохранено";
             } else {
