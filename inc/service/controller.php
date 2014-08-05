@@ -53,4 +53,8 @@ abstract class Controller
         return APP_BASE_URL . implode("/", $args);
 
     }
+
+    public function isPost(){
+        return !empty($_POST);
+    }
 } 
