@@ -26,7 +26,10 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="<?= Controller::url('user') ?>">Users</a>
+                    <a href="<?= Controller::url('user') ?>">Пользователи</a>
+                </li>
+                <li>
+                    <a href="<?= Controller::url('guestbook') ?>">Гостевая книга</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
