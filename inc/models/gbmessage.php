@@ -58,7 +58,7 @@ Class GbMessageModel extends Model{
      */
     public function insert(){
         if($this->isValid()){
-            $st = $this->db()->prepare('INSERT INTO '.APP_DB_PREFIX.'gb_messages (userName, userEmail, messageText) VALUES(:userName, :userEmail, :messageText)');
+            $st = $this->db()->prepare('INSERT INTO {{gb_messages}} (userName, userEmail, messageText) VALUES(:userName, :userEmail, :messageText)');
             $rezult = $st->execute(array(
                 ':userName' => $this->userName,
                 ':userEmail' => $this->userEmail,
@@ -88,7 +88,7 @@ Class GbMessageModel extends Model{
      * Возвращает общее колличество записей в гостевой книге
      */
     public static function getTotalCount(){
-        $st = self::db()->prepare('SELECT COUNT(*) FROM  `'.APP_DB_PREFIX.'gb_messages`');
+        $st = self::db()->prepare('SELECT COUNT(*) FROM  `{{gb_messages}}`');
         $st->execute();
         return $st->fetchColumn();
     }
@@ -101,7 +101,7 @@ Class GbMessageModel extends Model{
      */
     public static function getList($pageNum = 1, $perPage = APP_GB_MESSAGES_PER_PAGE){
         $offset =  ($pageNum > 1)? ($pageNum-1)*$perPage: 0;
-        $st = self::db()->prepare('SELECT * FROM '.APP_DB_PREFIX.'gb_messages ORDER BY `date` DESC  LIMIT :limit OFFSET :offset');
+        $st = self::db()->prepare('SELECT * FROM {{gb_messages}} ORDER BY `date` DESC  LIMIT :limit OFFSET :offset');
         $st->bindParam(':limit', $perPage, PDO::PARAM_INT);
         $st->bindParam(':offset', $offset, PDO::PARAM_INT);
         $rez = $st->execute();

@@ -32,9 +32,9 @@ class App_PDO extends PDO
      * @return mixed|PDOStatement
      */
     public function query($statment){
-        $statment = $this->prepareQuery($statment);
         $this->addQuery($statment);
         $args = func_get_args();
+        $args[0] = $this->prepareQuery($args[0]);
         return call_user_func_array(array('parent','query'), $args);
     }
 
