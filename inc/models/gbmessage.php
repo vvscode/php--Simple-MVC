@@ -84,9 +84,24 @@ Class GbMessageModel extends Model{
         return false;
     }
 
+    /**
+     * Возвращает общее колличество записей в гостевой книге
+     */
+    public static function getTotalCount(){
+        $st = self::db()->prepare('SELECT COUNT(*) FROM  `'.APP_DB_PREFIX.'gb_messages`');
+        $st->execute();
+        return $st->fetchColumn();
+    }
+
+    /**
+     * Возвращает список моделей для указанной страницы гостевой книги
+     * @param int $pageNum
+     * @param int $perPage
+     * @return mixed
+     */
     public static function getList($pageNum = 1, $perPage = APP_GB_MESSAGES_PER_PAGE){
         $offset =  ($pageNum > 1)? ($pageNum-1)*$perPage: 0;
-        $st = self::db()->prepare('SELECT * FROM '.APP_DB_PREFIX.'gb_messages LIMIT :limit OFFSET :offset');
+        $st = self::db()->prepare('SELECT * FROM '.APP_DB_PREFIX.'gb_messages ORDER BY `date` DESC  LIMIT :limit OFFSET :offset');
         $st->bindParam(':limit', $perPage, PDO::PARAM_INT);
         $st->bindParam(':offset', $offset, PDO::PARAM_INT);
         $rez = $st->execute();
@@ -97,6 +112,5 @@ Class GbMessageModel extends Model{
             // todo: throw exception
             // var_dump($st->errorInfo());
         }
-
     }
 }

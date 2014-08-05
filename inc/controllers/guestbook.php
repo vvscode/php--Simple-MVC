@@ -28,6 +28,11 @@ class GuestBookController extends Controller
         $this->view->msg = $message;
         $this->view->gbCaptchaQuestion = Captcha::getCaptchaQuestion('gbForm');
 
+        $messagesCount = GbMessageModel::getTotalCount();
+        $this->view->currentPage = $page;
+        $this->view->totalPages = ($messagesCount/APP_GB_MESSAGES_PER_PAGE > 0)? (int)($messagesCount/APP_GB_MESSAGES_PER_PAGE) + 1: $messagesCount/APP_GB_MESSAGES_PER_PAGE;
+        $this->view->pagerLinkTpl = Controller::url('guestbook','index','{{PAGE}}');
+
         $this->view->render('guestbook/index');
     }
 }
