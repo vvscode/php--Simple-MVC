@@ -83,4 +83,20 @@ Class GbMessageModel extends Model{
         $this->errors['save'] = 'Ошибка сохранения';
         return false;
     }
+
+    public static function getList($pageNum = 1, $perPage = APP_GB_MESSAGES_PER_PAGE){
+        $offset =  $perPage*(($pageNum > 1)? ($pageNum-1)*$perPage: 0);
+        $st = self::db()->prepare('SELECT * FROM '.APP_DB_PREFIX.'gb_messages LIMIT :limit OFFSET :offset');
+        $st->bindParam(':limit', $perPage, PDO::PARAM_INT);
+        $st->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $rez = $st->execute();
+
+        if($rez){
+            return $st->fetchAll(PDO::FETCH_CLASS, GbMessageModel);
+        } else {
+            // todo: throw exception
+            // var_dump($st->errorInfo());
+        }
+
+    }
 }
