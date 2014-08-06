@@ -9,7 +9,8 @@ class UserController extends Controller
     }
 
 
-    public function viewAction($uid){
+    public function viewAction($uid)
+    {
         $this->view->user = UserModel::findBy(array('id' => $uid));
         $this->view->render('user/view');
     }

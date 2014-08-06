@@ -20,8 +20,9 @@ class View
     /**
      * @param $name имя шаблона, который нужно отобразить. Отображается только шаблон
      */
-    public function renderPartial($name,  array $data = array()){
-        if(!empty($data)){
+    public function renderPartial($name, array $data = array())
+    {
+        if (!empty($data)) {
             extract($data);
         }
         require('inc/views/' . $name . '.php');

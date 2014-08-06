@@ -6,18 +6,18 @@ class GuestBookController extends Controller
     public function indexAction($page = 1)
     {
         $message = new GbMessageModel();
-        if($this->isPost()){
+        if ($this->isPost()) {
             $captchaFlag = Captcha::isValidCaptcha(@$_POST['captcha'], 'gbForm');
 
             $message->setAttributes($_POST);
 
-            if($message->isValid() AND $captchaFlag AND $message->insert()){
+            if ($message->isValid() AND $captchaFlag AND $message->insert()) {
                 $message->messageText = "";
                 $this->view->result = "Сообщение сохранено";
             } else {
                 $this->view->gbErrors = $message->getErrors();
 
-                if(!$captchaFlag){
+                if (!$captchaFlag) {
                     $this->view->gbErrors['captcha'] = 'Неверный ответ';
                 }
             }
@@ -30,8 +30,8 @@ class GuestBookController extends Controller
 
         $messagesCount = GbMessageModel::getTotalCount();
         $this->view->currentPage = $page;
-        $this->view->totalPages = ($messagesCount/APP_GB_MESSAGES_PER_PAGE > 0)? (int)($messagesCount/APP_GB_MESSAGES_PER_PAGE) + 1: $messagesCount/APP_GB_MESSAGES_PER_PAGE;
-        $this->view->pagerLinkTpl = Controller::url('guestbook','index','{{PAGE}}');
+        $this->view->totalPages = ($messagesCount / APP_GB_MESSAGES_PER_PAGE > 0) ? (int)($messagesCount / APP_GB_MESSAGES_PER_PAGE) + 1 : $messagesCount / APP_GB_MESSAGES_PER_PAGE;
+        $this->view->pagerLinkTpl = Controller::url('guestbook', 'index', '{{PAGE}}');
 
         $this->view->render('guestbook/index');
     }

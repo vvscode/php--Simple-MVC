@@ -54,7 +54,8 @@ abstract class Controller
 
     }
 
-    public function isPost(){
+    public function isPost()
+    {
         return !empty($_POST);
     }
 } 

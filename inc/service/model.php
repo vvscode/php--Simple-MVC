@@ -29,8 +29,9 @@ class Model
      * Устанавливает в модель группу атрибутов из массива
      * @param array $arr ассоциативный массив имя свойства - значение
      */
-    public function setAttributes(array $arr){
-        foreach($arr as $key => $val){
+    public function setAttributes(array $arr)
+    {
+        foreach ($arr as $key => $val) {
             $this->$key = $val;
         }
     }

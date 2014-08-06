@@ -12,14 +12,14 @@ class App
     {
         self::$startTime = microtime(true);
 
-        $url = isset($_GET['url']) ? trim($_GET['url']) : DEFAULT_CONTROLLER;
+        $url = isset($_GET['url']) ? trim($_GET['url']) : APP_DEFAULT_CONTROLLER;
         $urlParts = explode('/', rtrim($url, '/'));
 
         $actionParams = array_slice($urlParts, 2);
 
         self::$controllerName = $urlParts[0];
 
-        $controllerName =  self::$controllerName . 'Controller';
+        $controllerName = self::$controllerName . 'Controller';
 
         $controller = new $controllerName;
 
@@ -45,7 +45,8 @@ class App
      * Возвращает имя текущего контроллера
      * @return mixed
      */
-    public static function getCurrentController(){
+    public static function getCurrentController()
+    {
         return strtolower(self::$controllerName);
     }
 

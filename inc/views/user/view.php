@@ -1,6 +1,6 @@
-<a href="<?= Controller::url('user')?>">К списку пользователей </a>
+<a href="<?= Controller::url('user') ?>">К списку пользователей </a>
 <p>
-    <pre>
+<pre>
         <?php var_dump($this->user); ?>
     </pre>
 </p>
