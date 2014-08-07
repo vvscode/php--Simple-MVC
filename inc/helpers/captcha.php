@@ -3,7 +3,7 @@
 class Captcha
 {
 
-    public static function getCaptchaQuestion($prefix = '')
+    public static function generateCaptchaQuestion($prefix = '')
     {
         $answ = rand(1, 20);
         $marker = rand(0, 1) ? '+' : '-';
@@ -18,8 +18,11 @@ class Captcha
                 break;
         }
 
+        $question = $a . ' ' . $marker . ' ' . $b;
+
         $_SESSION[$prefix . '_captcha'] = $answ;
-        return $a . ' ' . $marker . ' ' . $b;
+        $_SESSION[$prefix . '_captcha_question'] = $question;
+        return $question;
     }
 
     public static function isValidCaptcha($answ, $prefix = '')
@@ -30,9 +33,17 @@ class Captcha
 
     public static  function getCaptchaAnswer($prefix){
         if(!isset($_SESSION[$prefix . '_captcha'])){
-            self::getCaptchaQuestion();
+            self::generateCaptchaQuestion($prefix);
         }
 
         return $_SESSION[$prefix . '_captcha'];
+    }
+
+    public static  function getCaptchaQuestion($prefix){
+        if(!isset($_SESSION[$prefix . '_captcha'])){
+            self::generateCaptchaQuestion($prefix);
+        }
+
+        return $_SESSION[$prefix . '_captcha_question'];
     }
 }
