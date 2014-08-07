@@ -26,7 +26,7 @@ class GuestBookController extends Controller
         $this->view->messages = GbMessageModel::getList($page);
 
         $this->view->msg = $message;
-        $this->view->gbCaptchaQuestion = Captcha::getCaptchaQuestion('gbForm');
+        $this->view->gbCaptchaQuestion = Captcha::generateCaptchaQuestion('gbForm');
 
         $messagesCount = GbMessageModel::getTotalCount();
         $this->view->currentPage = $page;
