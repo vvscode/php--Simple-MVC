@@ -27,4 +27,12 @@ class Captcha
         $rightAnsw = isset($_SESSION[$prefix . '_captcha']) ? $_SESSION[$prefix . '_captcha'] : '';
         return $answ == $rightAnsw;
     }
+
+    public static  function getCaptchaAnswer($prefix){
+        if(!isset($_SESSION[$prefix . '_captcha'])){
+            self::getCaptchaQuestion();
+        }
+
+        return $_SESSION[$prefix . '_captcha'];
+    }
 }
