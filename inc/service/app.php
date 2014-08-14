@@ -8,7 +8,7 @@ class App
     private static $startTime;
     private static $controllerName;
 
-    public function __construct()
+    public static function start()
     {
         self::$startTime = microtime(true);
 

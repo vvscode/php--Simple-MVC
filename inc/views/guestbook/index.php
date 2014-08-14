@@ -22,3 +22,27 @@ $this->renderPartial('common/pager', array(
     'pagerLinkTpl' => $this->pagerLinkTpl
 ));
 ?>
+
+<script>
+    $(function(){
+       $(document).on('submit', 'form', function(ev){
+           var $form = $(this);
+
+           $.ajax({
+               url: window.location.href,
+               data: $form.serializeArray(),
+               type: 'POST',
+               success: function(data){
+                   if(data.indexOf('alert-warning')>=0){
+                       $(data).prependTo($form.parent());
+                       $form.remove();
+                   } else {
+                       window.location.reload();
+                   }
+               }
+           })
+
+           ev.preventDefault();
+       });
+    });
+</script>

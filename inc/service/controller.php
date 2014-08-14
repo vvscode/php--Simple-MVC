@@ -23,6 +23,10 @@ abstract class Controller
         $this->view->title = get_class($this);
     }
 
+    public function isAjax(){
+        return (isset($_GET['ajax']) || (isset($_SERVER['HTTP_X_REQUESTED_WITH']) AND $_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest'));
+    }
+
     public function indexAction()
     {
         echo __CLASS__ . '->' . __METHOD__ . '<br />';

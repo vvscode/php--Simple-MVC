@@ -33,6 +33,10 @@ class GuestBookController extends Controller
         $this->view->totalPages = ($messagesCount / APP_GB_MESSAGES_PER_PAGE > 0) ? (int)($messagesCount / APP_GB_MESSAGES_PER_PAGE) + 1 : $messagesCount / APP_GB_MESSAGES_PER_PAGE;
         $this->view->pagerLinkTpl = Controller::url('guestbook', 'index', '{{PAGE}}');
 
-        $this->view->render('guestbook/index');
+        if($this->isAjax()){
+            $this->view->renderPartial('guestbook/parts/form');
+        } else {
+            $this->view->render('guestbook/index');
+        }
     }
 }
