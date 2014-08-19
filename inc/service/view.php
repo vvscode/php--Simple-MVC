@@ -4,7 +4,8 @@ class View
 {
     public function __construct()
     {
-
+        // Add ob_start to send headers from views
+        ob_start();
     }
 
     /**
