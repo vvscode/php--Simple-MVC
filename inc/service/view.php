@@ -28,4 +28,9 @@ class View
         }
         require(APP_BASE_PATH.'/inc/views/' . $name . '.php');
     }
+
+
+    public function __get($name){
+        return "";
+    }
 }
