@@ -13,9 +13,9 @@ class View
      */
     public function render($name, array $data = array())
     {
-        require 'inc/views/header.php';
+        require APP_BASE_PATH.'/inc/views/header.php';
         $this->renderPartial($name, $data);
-        require 'inc/views/footer.php';
+        require APP_BASE_PATH.'/inc/views/footer.php';
     }
 
     /**
@@ -26,6 +26,6 @@ class View
         if (!empty($data)) {
             extract($data);
         }
-        require('inc/views/' . $name . '.php');
+        require(APP_BASE_PATH.'/inc/views/' . $name . '.php');
     }
 }

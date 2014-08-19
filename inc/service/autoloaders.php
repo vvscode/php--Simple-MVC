@@ -60,3 +60,11 @@ spl_autoload_register(function ($class) {
         return true;
     }
 });
+
+
+// Последний лоадер добавлен, чтобы перехватывать Fatal error при ненайденом классе
+spl_autoload_register(function ($class) {
+    $controller = new ErrorController();
+    $controller->classNotFoundAction($class);
+    die;
+});
