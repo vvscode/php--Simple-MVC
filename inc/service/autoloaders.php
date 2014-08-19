@@ -8,12 +8,12 @@ spl_autoload_register(function ($class) {
     }
 
     if ($class == 'Model') {
-        require_once('inc/service/model.php');
+        require_once(APP_BASE_PATH.'/inc/service/model.php');
         return true;
     }
 
     $modelName = str_replace('model', '', strtolower($class));
-    $modelFileName = 'inc/models/' . $modelName . '.php';
+    $modelFileName = APP_BASE_PATH.'/inc/models/' . $modelName . '.php';
     if (file_exists($modelFileName)) {
         require_once($modelFileName);
         return true;
@@ -29,12 +29,12 @@ spl_autoload_register(function ($class) {
     }
 
     if ($class == 'Controller') {
-        require_once('inc/service/controller.php');
+        require_once(APP_BASE_PATH.'/inc/service/controller.php');
         return true;
     }
 
     $controllerName = str_replace('controller', '', strtolower($class));
-    $controllerFileName = 'inc/controllers/' . $controllerName . '.php';
+    $controllerFileName = APP_BASE_PATH.'/inc/controllers/' . $controllerName . '.php';
     if (file_exists($controllerFileName)) {
         require_once($controllerFileName);
         return true;
@@ -43,7 +43,7 @@ spl_autoload_register(function ($class) {
 
 // Подргузка сервисных классов
 spl_autoload_register(function ($class) {
-    $classFileName = 'inc/service/' . strtolower($class) . '.php';
+    $classFileName = APP_BASE_PATH.'/inc/service/' . strtolower($class) . '.php';
 
     if (file_exists($classFileName)) {
         require_once($classFileName);
@@ -53,7 +53,7 @@ spl_autoload_register(function ($class) {
 
 // Подргузка классов-помшников
 spl_autoload_register(function ($class) {
-    $classFileName = 'inc/helpers/' . strtolower($class) . '.php';
+    $classFileName = APP_BASE_PATH.'/inc/helpers/' . strtolower($class) . '.php';
 
     if (file_exists($classFileName)) {
         require_once($classFileName);
