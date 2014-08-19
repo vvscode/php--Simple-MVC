@@ -28,7 +28,8 @@ class App
         if (method_exists($controller, $actionName)) {
             call_user_func_array(array($controller, $actionName), $actionParams);
         } else {
-            throw new Exception('Action not found');
+            $controller = new ErrorController();
+            $controller->notFoundAction($controller, $actionName);
         }
     }
 
