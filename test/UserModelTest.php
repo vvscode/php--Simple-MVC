@@ -4,9 +4,9 @@ namespace test;
 require_once __DIR__.'/../inc/inc.php';
 
 class UserModelTest extends \PHPUnit_Framework_TestCase {
-    public function testFailExample(){
-        $this->assertTrue(FALSE, 'Example for failing test case');
-    }
+//    public function testFailExample(){
+//        $this->assertTrue(FALSE, 'Example for failing test case');
+//    }
 
     public function testSuccessExample(){
         $this->assertTrue(TRUE, 'Example for successed test case');
@@ -17,10 +17,10 @@ class UserModelTest extends \PHPUnit_Framework_TestCase {
 
         $arr = \UserModel::getList();
         $this->assertTrue(is_array($arr), '\User::getList result should be an array');
+    }
 
-        $this->assertTrue(method_exists('\UserModel', 'findBy'), 'UserModel should have findBy method');
+    public function testUserFindBy(){
         $user1 = \UserModel::findBy(array('id' => 1));
-
         $this->assertInstanceOf('\UserModel', $user1, 'If user exists - findBy should return UserModel');
 
         $userNotExists = \UserModel::findBy(array('id' => null));

@@ -115,7 +115,7 @@ Class GbMessageModel extends Model
         $rez = $st->execute();
 
         if ($rez) {
-            return $st->fetchAll(PDO::FETCH_CLASS, GbMessageModel);
+            return $st->fetchAll(PDO::FETCH_CLASS, 'GbMessageModel');
         } else {
             // todo: throw exception
             // var_dump($st->errorInfo());
