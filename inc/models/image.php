@@ -20,6 +20,21 @@ class ImageModel extends Model {
         return $this;
     }
 
+    protected function addNoise($img){
+        $lineNum = rand(10, 20);
+        for($i = 0; $i<$lineNum; $i++){
+            $lineColor = imagecolorallocate($img, rand(150,255), rand(150, 255), rand(150, 255));
+            $x1 = rand(0, $this->imgWidth / 2 );
+            $y1 = rand(0, $this->imgHeight / 2);
+            $x2 = rand($x1, $this->imgWidth);
+            $y2 = rand($y1, $this->imgHeight);
+
+            $lineFunc = rand(0, 1)? 'imagedashedline': 'imageline';
+
+            $lineFunc($img, $x1, $y1, $x2, $y2, $lineColor);
+        }
+    }
+
     public function send(){
         // Создаем холст
         $img = imagecreate($this->imgWidth, $this->imgHeight);
@@ -29,6 +44,10 @@ class ImageModel extends Model {
         imagefill($img, 0, 0, $backGroudColor);
         // Цвет текста
         $textColor = imagecolorallocate( $img, rand(0, 150), rand(0, 150), rand(0, 150) );
+
+        // добавляем шум
+        $this->addNoise($img);
+
         // рисуем картинку
         imagettftext(
             $img,   // холст
